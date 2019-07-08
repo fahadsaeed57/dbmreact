@@ -88,7 +88,7 @@ export default class SignUpForm extends React.Component {
       <ScrollView style={styles.signUpContainer}>
         <Text style={styles.header}> Signup </Text>
           <View>
-            <Ionicons name={"ios-person"} size={28} color={'white'}
+            <Ionicons name={"ios-person"} size={28} color={'#0050a0'}
               style={styles.inputIcon} />
             <TextInput
               placeholder='First Name'
@@ -103,7 +103,7 @@ export default class SignUpForm extends React.Component {
             />
           </View>
           <View>
-            <Ionicons name={"ios-person"} size={28} color={'white'}
+            <Ionicons name={"ios-person"} size={28} color={'#0050a0'}
               style={styles.inputIcon} />
             <TextInput
               placeholder='Last Name'
@@ -119,7 +119,7 @@ export default class SignUpForm extends React.Component {
             />
           </View>
           <View>
-            <Ionicons name={"ios-phone-portrait"} size={28} color={'white'}
+            <Ionicons name={"ios-phone-portrait"} size={28} color={'#0050a0'}
               style={styles.inputIcon} />
             <TextInput
               placeholder='Phone Number'
@@ -135,7 +135,7 @@ export default class SignUpForm extends React.Component {
             />
           </View>
           <View>
-            <Ionicons name={"logo-reddit"} size={28} color={'white'}
+            <Ionicons name={"logo-reddit"} size={28} color={'#0050a0'}
               style={styles.inputIcon} />
             <TextInput
               placeholder='Age'
@@ -151,7 +151,7 @@ export default class SignUpForm extends React.Component {
             />
           </View>
           <View> 
-            <Ionicons name={"md-create"} size={28} color={'white'}
+            <Ionicons name={"md-create"} size={28} color={'#0050a0'}
               style={styles.inputIcon} />
             <TextInput
               placeholder='password'
@@ -166,7 +166,7 @@ export default class SignUpForm extends React.Component {
             />
           </View>
           <View> 
-            <Ionicons name={"md-create"} size={28} color={'white'}
+            <Ionicons name={"md-create"} size={28} color={'#0050a0'}
               style={styles.inputIcon} />
             <TextInput
               placeholder='Confirm'
@@ -181,7 +181,7 @@ export default class SignUpForm extends React.Component {
               />
           </View>
           <View>
-              <Ionicons name={"ios-at"} size={28} color={'white'}
+              <Ionicons name={"ios-at"} size={28} color={'#0050a0'}
                 style={styles.inputIcon} />
               <TextInput
                 placeholder='Email Address'
@@ -235,7 +235,7 @@ const styles = StyleSheet.create({
   },
   btntext: {
     // color: '#E57373',
-    color: "white",
+    color: "#0050a0",
     fontSize: 28,
     fontWeight: "normal"
   },
@@ -244,17 +244,17 @@ const styles = StyleSheet.create({
     top: 10,
     left: 20
   },
-  signupText: {
-    paddingTop: 40,
-    color: 'white',
-    alignSelf: 'center',
-    fontWeight: 'bold',
-    fontSize: 16
-  },
+  // signupText: {
+  //   paddingTop: 40,
+  //   color: '#0050a0',
+  //   alignSelf: 'center',
+  //   fontWeight: 'bold',
+  //   fontSize: 16
+  // },
   header: {
     paddingTop: 55,
     fontSize: totalSize (6) ,
-    color: 'white',
+    color: '#0050a0',
     fontWeight: 'bold',
     marginBottom: 60,
     alignSelf: "center"

@@ -84,7 +84,7 @@ class Welcome extends Component {
           <Image
             source={item.source}
             resizeMode="contain"
-            style={{ width, height: height / 2.15, overflow: 'visible' }}
+            style={{ width, height: height / 2.35, overflow: 'visible' }}
           />
         )}
         onScroll={

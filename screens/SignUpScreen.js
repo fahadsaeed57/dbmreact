@@ -10,7 +10,7 @@ export default class SignUpScreen extends React.Component {
     render() {
       return (
         <KeyboardAvoidingView behavior= "padding" style={styles.wrapper}>
-          <LinearGradient style={styles.container}  colors={['#2BC0E4', '#EAECC6']}>
+          <LinearGradient style={styles.container}  colors={['#87CEEB', 'white']}>
               <SignUpForm  navigation={this.props.navigation}/>
               <TouchableOpacity 
                 onPress = {() => {this.props.navigation.navigate('Login')}}
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
       signupText:{
         paddingTop :15,
         marginBottom : 15,
-        color: 'white',
+        color: '#0050a0',
         alignSelf: 'center',
         fontWeight: 'bold',
         fontSize: 16

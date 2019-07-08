@@ -8,6 +8,8 @@ import Loading from './screens/Loading';
 import Main from './screens/Main';
 import Todoscreen from './screens/Todoscreen';
 import WelcomeSCreen from './screens/WelcomeScreen';
+import TestScreen from './screens/TestScreen';
+import ReportScreen from './screens/ReportScreen';
 
 const LoginSignUp = createStackNavigator({
   Welcome: {
@@ -44,6 +46,12 @@ const App = createStackNavigator({
   },
   Todo : {
     screen : Todoscreen
+  },
+  Test : {
+      screen : TestScreen
+  },
+  Report : {
+    screen : ReportScreen
   }
   
 

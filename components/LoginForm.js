@@ -52,7 +52,7 @@ constructor(props){
         <Text style={styles.header}> Login </Text>
         <View>
         
-        <Ionicons name={"ios-person-add"} size={28} color={'#E57373'}
+        <Ionicons name={"ios-person"} size={28} color={'#0050a0'}
            style={styles.inputIcon}/>
         <TextInput 
           placeholder='Username/Email'
@@ -68,7 +68,7 @@ constructor(props){
         />
         </View>
         <View>
-        <Ionicons name={"ios-lock"} size={28} color={'#E57373'}
+        <Ionicons name={"ios-lock"} size={28} color={'#0050a0'}
            style={styles.inputIcon}/>
         <TextInput 
           placeholder='Password'
@@ -124,18 +124,18 @@ const styles = StyleSheet.create({
     borderRadius:70,
     },
     btntext: {
-      color: 'white',
+      color: '#0050a0',
       fontSize: 28,
       fontWeight: "normal"
     },
     inputIcon: {
       position: 'absolute',
       top: 10,
-      left:20
+      left:20,
     },
     signupText:{
       paddingTop: 40,
-      color: 'white',
+      color: '#0050a0',
       alignSelf: 'center',
       fontWeight: 'bold',
       fontSize: 16
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     header: {
       paddingTop: 40,
       fontSize: 38,
-      color: 'white',
+      color: '#0050a0',
       fontWeight: 'bold',
       marginBottom: 80,
       alignSelf: "center"

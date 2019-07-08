@@ -83,7 +83,7 @@ class TodoList extends Component {
               );
             }}
           >
-            <Ionicons name={"ios-trash"} size={30} color={"#800080"} />
+            <Ionicons name={"ios-trash"} size={30} color={'#0050a0'} />
           </TouchableOpacity>
         </View>
       </View>
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     borderColor: "#bbb"
   },
   incompleteCircle: {
-    borderColor: "purple"
+    borderColor: '#0050a0',
   },
   strikeText: {
     color: "#bbb",

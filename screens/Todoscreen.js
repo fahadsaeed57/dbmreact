@@ -4,7 +4,7 @@ import {LinearGradient} from 'expo';
 import {Ionicons} from '@expo/vector-icons';
 import TodoList from '../components/TodoList';
 import firebase from 'firebase';
-import ListItem from '../components/ListItem';
+
 
 
 const { height, width } = Dimensions.get('window');
@@ -90,7 +90,7 @@ onPressAdd = () => {
     // }
     // )
     return (
-      <LinearGradient style={styles.container}  colors={['#DA4453', '#89216B']}>
+      <LinearGradient style={styles.container}  colors={[ '#87CEEB', 'white']}>
         <StatusBar barStyle = "light-content" />
         <Text style={styles.appTitle}> To do list</Text>
         <View style={styles.card}>
@@ -124,7 +124,7 @@ onPressAdd = () => {
                 </FlatList>
             </ScrollView>
             <TouchableOpacity style = {styles.button} onPress={this.onPressAdd}>
-            <Ionicons name={"ios-add-circle"} size={70} color={'#800080'}
+            <Ionicons name={"ios-add-circle"} size={70} color={'#0050a0'}
            style={styles.inputIcon}/>
             </TouchableOpacity>
         </View>
@@ -141,11 +141,11 @@ const styles = StyleSheet.create({
     //justifyContent: 'center'
   },
   appTitle: {
-    color: '#fff',
+    color: '#0050a0',
     fontSize: 36,
     marginTop: 60,
     marginBottom: 30,
-    fontWeight: '300'
+    fontWeight: 'bold'
   },
   card: {
     backgroundColor: '#fff',

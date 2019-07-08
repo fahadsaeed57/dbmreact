@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Dimensions, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
-
+import {Ionicons} from '@expo/vector-icons';
 import { Card, Badge, Button, Block, Text } from '../components';
 import { theme, mocks } from '../constants';
-
+import firebase from 'firebase';
 const { width } = Dimensions.get('window');
 
 class Main extends Component {
@@ -48,43 +48,70 @@ class Main extends Component {
   render() {
     const { profile, navigation } = this.props;
     const { categories } = this.state;
-    const tabs = ['Products', 'Inspirations', 'Shop'];
+    const tabs = ['Products'];
 
     return (
-      <Block>
+      <Block  style={{backgroundColor: 'white'}}>
         <Block flex={false} row center space="between" style={styles.header}>
-          <Text h1 bold>Browse</Text>
-          <Button onPress={() => navigation.navigate('Settings')}>
-            <Image
-              source={profile.avatar}
-              style={styles.avatar}
-            />
+          <Text h1 bold primary>Warden</Text>
+          <Button onPress={() => firebase.auth().signOut()}>
+          <Ionicons name={"ios-log-out"} size={28} color={'#0050a0'}/>
           </Button>
         </Block>
 
-        <Block flex={false} row style={styles.tabs}>
+        {/* <Block flex={false} row style={styles.tabs}>
           {tabs.map(tab => this.renderTab(tab))}
-        </Block>
+        </Block> */}
 
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={{ paddingVertical: theme.sizes.base * 2}}
         >
           <Block flex={false} row space="between" style={styles.categories}>
-            {categories.map(category => (
-              <TouchableOpacity
-                key={category.name}
-                onPress={() => navigation.navigate('Explore', { category })}
+          <TouchableOpacity
+                
+                onPress={() => navigation.navigate('Chat')}
+              >
+                <Card center middle shadow style={styles.category } >
+                  <Badge margin={[0, 0, 15]} size={90} color="#87CEEB">
+                    <Image source={require('../assets/images/1.png')} style={{height:60,width:65}} />
+                  </Badge>
+                  <Text medium height={30}>Chat</Text>
+                </Card>
+                </TouchableOpacity>
+                <TouchableOpacity
+                
+                onPress={() => this.props.navigation.navigate('Todo')}
+              >
+                <Card center middle shadow style={styles.category} >
+                  <Badge margin={[0, 0, 15]} size={90} color="#87CEEB">
+                    <Image source={require('../assets/images/2.png')} style={{height:60,width:60}}/>
+                  </Badge>
+                  <Text medium height={30}>To do</Text>
+                </Card>
+                </TouchableOpacity>
+                <TouchableOpacity
+                
+                onPress={() => this.props.navigation.navigate('Test')}
               >
                 <Card center middle shadow style={styles.category}>
-                  <Badge margin={[0, 0, 15]} size={50} color="rgba(41,216,143,0.20)">
-                    <Image source={category.image} />
+                  <Badge margin={[0, 0, 15]} size={90} color="#87CEEB">
+                    <Image source={require('../assets/images/4.png')} style={{height:65,width:55}} />
                   </Badge>
-                  <Text medium height={20}>{category.name}</Text>
-                  <Text gray caption>{category.count} products</Text>
+                  <Text medium height={30}>Personality Test</Text>
                 </Card>
-              </TouchableOpacity>
-            ))}
+                </TouchableOpacity>
+                <TouchableOpacity
+                
+                onPress={() => this.props.navigation.navigate('Report')}
+              >
+                <Card center middle shadow style={styles.category}>
+                  <Badge margin={[0, 0, 15]} size={90} color="#87CEEB">
+                    <Image source={require('../assets/images/5.png')}  style={{height:60,width:45}}/>
+                  </Badge>
+                  <Text medium height={20}>Performance Report</Text>
+                </Card>
+                </TouchableOpacity>
           </Block>
         </ScrollView>
       </Block>
@@ -131,5 +158,6 @@ const styles = StyleSheet.create({
     minWidth: (width - (theme.sizes.padding * 2.4) - theme.sizes.base) / 2,
     maxWidth: (width - (theme.sizes.padding * 2.4) - theme.sizes.base) / 2,
     maxHeight: (width - (theme.sizes.padding * 2.4) - theme.sizes.base) / 2,
-  }
+  },
+  
 })

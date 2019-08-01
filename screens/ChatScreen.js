@@ -12,7 +12,7 @@ import Expo from 'expo';
 
 let window = Dimensions.get('window');
 const contentHeight = window.height - 80;
-const avatarBot = "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg";
+const avatarBot = '../assets/images/icon.png';
 
 export default class ChatScreen extends Component {
   // static navigationOptions = {

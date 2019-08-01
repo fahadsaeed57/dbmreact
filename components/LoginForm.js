@@ -1,29 +1,38 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, keyboardType, Keyboard } from 'react-native';
+import { StyleSheet, View, TextInput, TouchableOpacity, keyboardType, Keyboard, ActivityIndicator } from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 import firebase from 'firebase';
 import '@firebase/firestore';
+import { Button, Text } from '../components';
+import { theme } from '../constants';
 export default class LoginForm extends React.Component {
 constructor(props){
   super(props)
   this.state = {
     email:'',
-    password: ''
+    password: '',
+    loading: false,
+    Error: ''
   }
 }
 
   login = () => {
     const {email,password} = this.state
+    Keyboard.dismiss();
+    this.setState({ loading: true });
     if(email=="" && password==""){
       // alert('Enter Your Email & Password')
+      this.setState({loading: false });
       this.setState({Error: 'Enter Your Email & Password'})
     }
     else if(email==""){
       // alert('Email not Found !')
+      this.setState({loading: false });
       this.setState({Error: 'Email not Found !'})
     }
     else if(password==""){
       // alert('Password not Found !')
+      this.setState({loading: false });
       this.setState({Error: 'Password not Found !'})
     }
     else {
@@ -34,18 +43,27 @@ constructor(props){
       .signInWithEmailAndPassword(this.state.email, this.state.password)
       .then((res) => {
         if(res.user.emailVerified==false){
+          this.setState({loading: false });
           alert("email not verified")
         }
         else{
+          this.setState({loading: false });
           this.props.navigation.navigate('App');
         }
       })
-      .catch(error => this.setState({ Error: error.message }))
-    }
+      .catch( 
+        
+        error =>{
+          this.setState({loading: false });
+          this.setState({ Error: error.message })
+      
+      },
+        )
 
-   Keyboard.dismiss()
+    }
   }
   render() {
+    const { loading } = this.state;
     return (
       <View style={styles.formContainer}>
        
@@ -70,7 +88,8 @@ constructor(props){
         <View>
         <Ionicons name={"ios-lock"} size={28} color={'#0050a0'}
            style={styles.inputIcon}/>
-        <TextInput 
+        <TextInput
+         
           placeholder='Password'
           secureTextEntry={true}
           style={styles.textInput}
@@ -86,12 +105,20 @@ constructor(props){
            <Text style = {{color: 'red', textAlign: "center"}}>
          {this.state.Error}
     </Text>
-        <TouchableOpacity 
+        {/* <TouchableOpacity 
         style={styles.button}
         onPress = {this.login}
         >
           <Text style={styles.btntext}> login </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+        <Button gradient onPress={this.login}>
+              {loading ?
+                <ActivityIndicator size="small" color="white" /> : 
+                <Text bold white center>Login</Text>
+              }
+              
+            </Button>
+
         
          
       

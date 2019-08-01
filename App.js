@@ -10,6 +10,9 @@ import Todoscreen from './screens/Todoscreen';
 import WelcomeSCreen from './screens/WelcomeScreen';
 import TestScreen from './screens/TestScreen';
 import ReportScreen from './screens/ReportScreen';
+import WalkthroughTravel from './screens/WalkthroughTravel/index';
+
+ 
 
 const LoginSignUp = createStackNavigator({
   Welcome: {
@@ -48,10 +51,10 @@ const App = createStackNavigator({
     screen : Todoscreen
   },
   Test : {
-      screen : TestScreen
+      screen : WalkthroughTravel
   },
   Report : {
-    screen : ReportScreen
+    screen : TestScreen
   }
   
 
@@ -71,3 +74,5 @@ export default Navigation;
 
 
 
+const styles = StyleSheet.create({
+});

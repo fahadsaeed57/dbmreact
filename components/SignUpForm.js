@@ -1,8 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, keyboardType, Keyboard, ScrollView } from 'react-native';
+import { StyleSheet, View, TextInput, TouchableOpacity, keyboardType, Keyboard, ScrollView, ActivityIndicator } from 'react-native';
 import { width, height, totalSize } from 'react-native-dimension';
 import { Ionicons } from '@expo/vector-icons';
 import firebase from 'firebase';
+import { Button, Text } from '../components';
+import { theme } from '../constants';
 import '@firebase/firestore';
 import credentials from '../firebase/auth';
 export default class SignUpForm extends React.Component {
@@ -16,38 +18,48 @@ export default class SignUpForm extends React.Component {
       password: '',
       Error: '',
       age: '',
-      conpassword: ''
+      conpassword: '',
+      loading: false
     }
     
   }
 
   signup = () => {
     const { fname, lname, phonenumber, email, password, age, conpassword } = this.state
+    Keyboard.dismiss();
+    this.setState({ loading: true });
     if (fname == "" && lname == "" && phonenumber == "" && email == "") {
       // alert('Enter Your credentials')
+      this.setState({loading: false });
       this.setState({ Error: 'Enter Your credentials' })
     }
     else if (fname == "") {
       // alert('First name missing !')
+      this.setState({loading: false });
       this.setState({ Error: 'First name missing !' })
     }
     else if (lname == "") {
       // alert('Last name is missing!')
+      this.setState({loading: false });
       this.setState({ Error: 'Last name missing !' })
     }
     else if (phonenumber == "") {
       // alert('Please enter your Phone Number')
+      this.setState({loading: false });
       this.setState({ Error: 'Please enter your Phone Number !' })
     }
     else if (age == "") {
       // alert('Please enter your Phone Number')
+      this.setState({loading: false });
       this.setState({ Error: 'Please enter your age !' })
     }
     else if (email == "") {
       // alert('Email not found!')
+      this.setState({loading: false });
       this.setState({ Error: 'Email not found' })
     }
     else if(password != conpassword){
+      this.setState({loading: false });
       this.setState({ Error: 'password doesnot match' })
     }
     else {
@@ -70,20 +82,26 @@ export default class SignUpForm extends React.Component {
             currentUser.sendEmailVerification(); 
             firebase.auth().signOut();
             // this.props.navigation.navigate('Auth');
+            this.setState({loading: false });
             alert("Email sent to your account please verify and login");
           }).catch(err => console.log(err))
         })
-        .catch(error => this.setState({ Error: error.message }))
-      
-      
-      
+        .catch( 
+        
+          error =>{
+            this.setState({loading: false });
+            this.setState({ Error: error.message })
+        
+        },
+          )
     }
 
-    Keyboard.dismiss()
+   
   }
 
 
   render() {
+    const { loading } = this.state;
     return (
       <ScrollView style={styles.signUpContainer}>
         <Text style={styles.header}> Signup </Text>
@@ -198,12 +216,19 @@ export default class SignUpForm extends React.Component {
         <Text style={{ color: 'red', textAlign: "center" }}>
           {this.state.Error}
         </Text>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.button}
           onPress={this.signup}
         >
           <Text style={styles.btntext}> SignUp </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+         <Button gradient onPress={this.signup}>
+              {loading ?
+                <ActivityIndicator size="small" color="white" /> : 
+                <Text bold white center>Signup</Text>
+              }
+            </Button>
+        
     </ScrollView>
     );
   }

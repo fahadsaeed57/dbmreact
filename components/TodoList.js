@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import firebase from "firebase";
+import {Notifications} from 'expo'
 const { height, width } = Dimensions.get("window");
 
 class TodoList extends Component {
@@ -18,7 +19,7 @@ class TodoList extends Component {
 
     this.state = {
       isEditing: false,
-      isCompleted: false
+      isCompleted: this.props.isComplete
     };
     this.ref = firebase.firestore().collection("todoTasks");
   }
@@ -27,14 +28,55 @@ class TodoList extends Component {
       return {
         isCompleted: !prevState.isCompleted
       };
-    });
+    },()=>{
+      var taskRef =this.ref.doc(this.props.id);
+
+      var setWithMerge = taskRef.set({
+          isComplete:this.state.isCompleted
+      }, { merge: true });
+      // this.setState({isCompleted:false})
+      if(this.props.isComplete==true){
+        Notifications.cancelScheduledNotificationAsync(this.props.notificationId)
+      }
+      else{
+        this.sendNotificationImmediately(this.props.taskname).then((res)=>{
+          this.ref.doc(this.props.id).update({
+              notificationId:res
+            });
+  
+        }).catch((err)=>{
+          console.log(err);
+        })
+      }
+      
+    }
+    )
+
+    
+  };
+  sendNotificationImmediately =  (taskname) => {
+    let notificationId = Notifications.scheduleLocalNotificationAsync({
+      title: 'Task Reminder',
+      body: 'you have to complete '+taskname,
+    }
+    ,
+    {
+      repeat: 'day',
+      time: new Date().getTime() + 5000,
+    },
+    
+    );
+  return notificationId; // can be saved in AsyncStorage or send to server
   };
   deleteItem = id => {
+    // Notifications.cancelAllScheduledNotificationsAsync();
+    Notifications.cancelScheduledNotificationAsync(this.props.notificationId)
     this.ref
       .doc(id)
       .delete()
       .then(function() {
         console.log("Document successfully deleted!");
+
       })
       .catch(function(error) {
         console.error("Error removing document: ", error);
@@ -61,8 +103,9 @@ class TodoList extends Component {
               isCompleted ? styles.strikeText : styles.unstrikeText
             ]}
           >
-            {this.props.taskname}{" "}
+            {this.props.taskname}{" "} 
           </Text>
+          <Text>{this.props.day+"/"}{this.props.month}  </Text>
         </View>
 
         <View style={{ justifyContent: "flex-end" }}>

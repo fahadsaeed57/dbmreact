@@ -1,14 +1,19 @@
 import React from 'react';
-import {KeyboardAvoidingView , ImageBackground,StyleSheet,TouchableOpacity,Text} from 'react-native';
+import {KeyboardAvoidingView , Image, StyleSheet, Dimensions, View} from 'react-native';
 import {LinearGradient} from 'expo';
+import AnswersInput from '../components/AnswersInput'
+import { Text } from '../components';
+import { theme, mocks } from '../constants';
+const { width } = Dimensions.get('window');
 
-
-export default class LoginScreen extends React.Component {
+import {Rating} from 'react-native-ratings';
+export default class ReportScreen extends React.Component {
     render(){
         return(
-           <LinearGradient style={styles.container} colors={['#87CEEB', 'white']}> 
-
-           </LinearGradient>
+           <View style={styles.container}>
+            <Text h1 bold primary>  {"\n"}Warden</Text>
+            <Text h2 secondary> Your Pal</Text>
+           </View>
         )
     }
 }
@@ -18,7 +23,7 @@ export default class LoginScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1, 
-        backgroundColor: '#f23657',
+        backgroundColor: 'white',
         alignSelf: 'stretch',
         width : null,
         justifyContent: 'center',

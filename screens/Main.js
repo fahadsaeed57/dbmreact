@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Dimensions, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
+import { Dimensions, Image, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native'
 import {Ionicons} from '@expo/vector-icons';
 import { Card, Badge, Button, Block, Text } from '../components';
 import { theme, mocks } from '../constants';
@@ -10,6 +10,16 @@ import { Permissions, Notifications } from 'expo';
 const PUSH_ENDPOINT = 'https://your-server.com/users/push-token';
 
 class Main extends Component {
+static navigationOptions={
+  title:"Warden"
+}
+  constructor(props){
+    super(props)
+    this.state = {
+      
+      loading: false,
+    }
+  }
 
   registerForPushNotificationsAsync = async () => {
     const { status: existingStatus } = await Permissions.getAsync(
@@ -50,26 +60,26 @@ class Main extends Component {
       console.log(error);
     }
   };
-  sendPushNotification = () => {
-    let response = fetch('https://exp.host/--/api/v2/push/send', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        to: 'ExponentPushToken[ubbWTmKWiwr6Z_IIqSsEbW]',
-        sound: 'default',
-        title: 'Demo',
-        body: 'Demo notificaiton'
-      })
-    });
-  };
+  // sendPushNotification = () => {
+  //   let response = fetch('https://exp.host/--/api/v2/push/send', {
+  //     method: 'POST',
+  //     headers: {
+  //       Accept: 'application/json',
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({
+  //       to: 'ExponentPushToken[ubbWTmKWiwr6Z_IIqSsEbW]',
+  //       sound: 'default',
+  //       title: 'Demo',
+  //       body: 'Demo notificaiton'
+  //     })
+  //   });
+  // };
  
 
   state = {
     active: 'Products',
-    categories: [],
+    categories: []
   }
 
   async componentDidMount() {
@@ -112,16 +122,26 @@ class Main extends Component {
   }
 
   render() {
+    
     const { profile, navigation } = this.props;
-    const { categories } = this.state;
+    const { categories, loading } = this.state;
     const tabs = ['Products'];
 
     return (
       <Block  style={{backgroundColor: 'white'}}>
         <Block flex={false} row center space="between" style={styles.header}>
           <Text h1 bold primary>Warden</Text>
-          <Button onPress={() => firebase.auth().signOut()}>
-          <Ionicons name={"ios-log-out"} size={28} color={'#0050a0'}/>
+         
+          <Button  onPress={() => 
+            {
+              this.setState({loading:true})
+              firebase.auth().signOut()
+            }}>
+              {loading ?
+                <ActivityIndicator size="small" color="#0050a0" /> : 
+                <Ionicons name={"ios-log-out"} size={28} color={'#0050a0'}/>
+              } 
+          
           </Button>
         </Block>
 

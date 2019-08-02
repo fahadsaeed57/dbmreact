@@ -4,6 +4,7 @@ import { DangerZone } from 'expo';
 import firebase from 'firebase';
 import '@firebase/firestore';
 import credentials from '../firebase/auth';
+import { Font } from 'expo';
 
 const { Lottie } = DangerZone;
 
@@ -18,6 +19,9 @@ export default class App extends React.Component {
 
   componentWillMount() {
     this._playAnimation();
+    Font.loadAsync({
+      'Roboto_medium': require('../Fonts/Roboto-Medium.ttf'),
+    });
     // setTimeout(()=>{
     //     this.props.navigation.navigate('Auth');
     // },2000)

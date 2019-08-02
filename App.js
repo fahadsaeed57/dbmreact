@@ -11,6 +11,7 @@ import WelcomeSCreen from './screens/WelcomeScreen';
 import TestScreen from './screens/TestScreen';
 import ReportScreen from './screens/ReportScreen';
 import WalkthroughTravel from './screens/WalkthroughTravel/index';
+import PerformanceGeneration from './screens/PerformanceGeneration';
 
  
 
@@ -51,10 +52,13 @@ const App = createStackNavigator({
     screen : Todoscreen
   },
   Test : {
-      screen : WalkthroughTravel
+      screen : TestScreen
   },
   Report : {
-    screen : TestScreen
+    screen : ReportScreen
+  },
+  PerformanceGeneration: {
+    screen : PerformanceGeneration
   }
   
 

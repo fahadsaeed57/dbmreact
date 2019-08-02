@@ -45,7 +45,12 @@ class TestScreen extends Component {
               questions.push({
                   question: doc.data().question,
                   id : doc.id,
-                  
+                  option1:doc.data().fagree,
+                  option2:doc.data().agree,
+                  option3:doc.data().normal,
+                  option4:doc.data().disagree,
+                  option5:doc.data().cdisagree
+
                   
                  
               });
@@ -67,13 +72,22 @@ class TestScreen extends Component {
 
   
 onPressingNext=()=>{
-  if(this.state.questionCount < this.state.questions.length){
+  if((this.state.questionCount !=this.state.checked.length)){
+    alert("Please enter your choice")
+  }
+  else if((this.state.questionCount < this.state.questions.length)){
    
 
-    this.setState({ selectedIndex:-1,questionCount:this.state.questionCount+1, currentQuestion: this.state.questions[this.state.questionCount-1]})
-  }else{
+    this.setState({ selectedIndex:this.state.selectedIndex-1,questionCount:this.state.questionCount+1, currentQuestion: this.state.questions[this.state.questionCount-1]})
+  }
+  
+  else{
     
-    alert("No more questions")
+    // alert("No more questions")
+    this.props.navigation.navigate('PerformanceGeneration',{
+      checked : this.state.checked,
+      totalquestions : this.state.questionCount
+    })
    }
 }
   onSelect(index, value,questionnum){
@@ -112,21 +126,21 @@ onPressingNext=()=>{
 
         onSelect = {(index, value) => this.onSelect(index, value,this.state.questionCount-1)}
       >
-        <RadioButton value={1} >
+        <RadioButton value={this.state.currentQuestion.option1} >
           <Text>Fully Agree </Text>
         </RadioButton>
     
-        <RadioButton value={0.8}>
+        <RadioButton value={this.state.currentQuestion.option2}>
           <Text>Agree</Text>
         </RadioButton>
     
-        <RadioButton value={0.6}>
+        <RadioButton value={this.state.currentQuestion.option3}>
           <Text>Normal</Text>
         </RadioButton>
-        <RadioButton value={0.4}>
+        <RadioButton value={this.state.currentQuestion.option4}>
           <Text>Disagree</Text>
         </RadioButton>
-        <RadioButton value={0.2}>
+        <RadioButton value={this.state.currentQuestion.option5}>
           <Text>Completely disagree</Text>
         </RadioButton>
       </RadioGroup>
